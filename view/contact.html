@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+<link rel="stylesheet" type="text/css" href="style.css">
+
+<head>
+  <title>rickyHewittNet</title>
+</head>
+
+<div class="stamp">
+  <h1>rickyHewittNet</h1>
+</div>
+
+<div class="wrapper">
+
+  <a href="/"><div class="box">
+    <p>Home</p>
+  </div></a>
+
+  <a href="/iCV"><div class="box">
+    <p>My CV</p>
+  </div></a>
+
+  <a href="/blog"><div class="box">
+    <p>My Coding</p>
+  </div></a>
+
+  <a href="/apps"><div class="box">
+    <p>My Apps</p>
+  </div></a>
+
+  <a href="/contact"><div class="box">
+    <p>Contact</p>
+  </div></a>
+
+</div>
+
+<div class="title" style="width:90%;left:5%">
+  <h1>Please feel free to contact me.</h1>
+</div>
+
+<div class="contactBox">
+  <h1><span>Phone</span>: +447402059516</h1>
+  </br>
+  <h1><span>Email</span>: richard.hewitt.94@gmail.com</h1>
+</div>
+
+<script>
+
+var menu = document.getElementsByClassName('box')
+
+for (i = 0; i < 5; i++) {
+
+  menu[i].addEventListener("mouseenter", function( event ) {
+    event.target.style.color = '#FF1783';
+  });
+
+  menu[i].addEventListener("mouseleave", function( event ) {
+    event.target.style.color = 'black';
+  });
+
+}
+
+</script>

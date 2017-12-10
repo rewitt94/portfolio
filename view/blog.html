@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+
+<link rel="stylesheet" type="text/css" href="style.css">
+
+<head>
+  <title>rickyHewittNet</title>
+</head>
+
+<div class="stamp">
+  <h1>rickyHewittNet</h1>
+</div>
+
+<div class="wrapper">
+
+  <a href="/"><div class="box">
+    <p>Home</p>
+  </div></a>
+
+  <a href="/iCV"><div class="box">
+    <p>My CV</p>
+  </div></a>
+
+  <a href="/blog"><div class="box">
+    <p>My Coding</p>
+  </div></a>
+
+  <a href="/apps"><div class="box">
+    <p>My Apps</p>
+  </div></a>
+
+  <a href="/contact"><div class="box">
+    <p>Contact</p>
+  </div></a>
+
+</div>
+
+<div class="title">
+  <h1> This page contains a brief summary of <span>my coding experience</span>.  </h1>
+</div>
+
+<div class="blogBox">
+  <h1 style="margin-bottom:20px">Coding Languages</h1>
+  <p></br><span>Javascript</span>: I started learning Javascript in early November when I started doing my application for London bootcamp Founders and Coders. Javascript instantly became and still is my favourite coding language. I have experimented with both express and vue.js.</p>
+  <p></br><span>HTML</span>: Having made a few different webpages on my laptop I have become more fluent in HTML. I'm sure any web developer would agree that the language is very easy to pick up. </p>
+  <p></br><span>CSS</span>: I have a basic grasp of CSS. I am accusomtimising to the rectangular format of web design. Currently, I feel capable to make attractive minimalistic websites. </p>
+  <p></br><span>Python</span>: My programming started with Python. With a very limited selection of methods I used Python to solve maths problems. This was almost exculsively with lists, if-conditions and iterative loops.</p>
+  <p></br><span>Ruby</span>: I have learnt some basic Ruby for my Makers application.</p>
+  <p></br><span>Rust</span>: I tried to learn some Rust. The language was far too difficult for a beginner. However, as the language is very clear about mutability, references/pointers and error handling I did learn some things about programming. Also having first tried Rust, Javascript was a walk in the park. </p>
+</div>
+
+<div class="blogBox">
+  <h1 style="margin-bottom:20px">My Accounts</h1>
+  <div class="wrapperTwo">
+    <div class="boxTwo">
+      <a href="https://github.com/rewitt94"><img src="https://png.icons8.com/windows/1600/0063B1/github" style="width:80px;border-radius:10%"></a>
+    </div>
+    <div class="boxTwo">
+      <p><span>GitHub</span>: First and foremost, ofcourse I have GitHub. Who doesn't?</p>
+    </div>
+  </div>
+  <div class="wrapperTwo">
+    <div class="boxTwo">
+      <a href="https://www.codewars.com/users/rewitt94"><img src="http://www.softlab.ntua.gr/~nickie/images/logo/codewars.png" style="width:70px;border-radius:10%"></a>
+    </div>
+    <div class="boxTwo">
+      <p><span>Codewars</span>: Codewars is a training site on which users create and solve problems. Most problems are algorithmic. I have reach 5 kyu (rank) with Javascript and created my own problem.</p>
+    </div>
+  </div>
+  <div class="wrapperTwo">
+    <div class="boxTwo">
+      <a href="https://www.freecodecamp.org/rewitt94"><img src="https://avatars0.githubusercontent.com/u/9892522?s=400&v=4" style="width:70px;border-radius:10%"></a>
+    </div>
+    <div class="boxTwo">
+      <p><span>freeCodeCamp</span>: freeCodeCamp is a nonprofit interactive web learning platform. I started with Javascript, HTML and CSS using freeCodeCamp.</p>
+    </div>
+  </div>
+  <div class="wrapperTwo">
+    <div class="boxTwo">
+      <a href="https://www.codecademy.com/rewitt94"><img src="http://news.codecademy.com/content/images/2017/11/CC-logo-short.png" style="width:70px;border-radius:10%"></a>
+    </div>
+    <div class="boxTwo">
+      <p><span>Codecademy</span>: I've learnt basic Ruby using codecademy.</p>
+    </div>
+  </div>
+</div>
+
+
+
+<script>
+
+var menu = document.getElementsByClassName('box')
+
+for (i = 0; i < 5; i++) {
+
+  menu[i].addEventListener("mouseenter", function( event ) {
+    event.target.style.color = '#FF1783';
+  });
+
+  menu[i].addEventListener("mouseleave", function( event ) {
+    event.target.style.color = 'black';
+  });
+
+}
+
+</script>

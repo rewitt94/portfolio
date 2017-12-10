@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+
+<link rel="stylesheet" type="text/css" href="style.css">
+
+<head>
+  <title>rickyHewittNet</title>
+</head>
+
+<div class="stamp">
+  <h1>rickyHewittNet</h1>
+</div>
+
+<div class="wrapper">
+
+  <a href="/"><div class="box">
+    <p>Home</p>
+  </div></a>
+
+  <a href="/iCV"><div class="box">
+    <p>My CV</p>
+  </div></a>
+
+  <a href="/blog"><div class="box">
+    <p>My Coding</p>
+  </div></a>
+
+  <a href="/apps"><div class="box">
+    <p>My Apps</p>
+  </div></a>
+
+  <a href="/contact"><div class="box">
+    <p>Contact</p>
+  </div></a>
+
+</div>
+
+<div class="title">
+  <h1>Below is an <span>interactive</span> activity for interested parties. A CV pdf is available on my GitHub <a href="https://github.com/rewitt94/foundersAndCoders/blob/master/Richard%20Hewitt%20CV.pdf"><span>here</span></a>.</h1>
+</div>
+
+
+
+<div class="ttlBox">
+  <p> The game is called Two Truths & A Lie. I will give you three statements about myself of which one is a lie. <span>Click on the lie</span>.</br></br></br></p>
+  <button class="ttl" onclick="interactive('lie',0,1,2,'One')">I built the Eiffel Tower</button>
+  <button class="ttl" onclick="interactive('truth',0,1,2,'One')">I am 23 years old</button>
+  <button class="ttl" onclick="interactive('truth',0,1,2,'One')">I studied Maths at uni</button>
+  <p id="responseOne" style="visibility:hidden"></br></br><span id="answerOne"></span>. Ofcourse I didn't build the Eiffel Tower, but I do have it tatooed on my leg. Hopefully that wasn't too testing. </p>
+</div>
+
+<div class="ttlBox">
+  <p> I would like to consider myself a world citizen. <span>Which is the lie</span>?</br></br></br></p>
+  <button class="ttl" onclick="interactive('truth',5,3,4,'Two')">I have worked in Spain</button>
+  <button class="ttl" onclick="interactive('truth',5,3,4,'Two')">I have worked in Italy</button>
+  <button class="ttl" onclick="interactive('lie',5,3,4,'Two')">I have worked in Estonia</button>
+  <p id="responseTwo" style="visibility:hidden"></br></br><span id="answerTwo"></span>. I have only worked in Italy and Spain but actually I have lived in all three. My family moved to Estonia for four years when I was a kid.</p>
+</div>
+
+<div class="ttlBox">
+  <p> Okay, what school subjects did I enjoy? <span>Which is the porky pie</span>?</br></br></br></p>
+  <button class="ttl" onclick="interactive('truth',7,6,8,'Three')">I liked English</button>
+  <button class="ttl" onclick="interactive('lie',7,6,8,'Three')">I liked French</button>
+  <button class="ttl" onclick="interactive('truth',7,6,8,'Three')">I liked Art</button>
+  <p id="responseThree" style="visibility:hidden"></br></br><span id="answerThree"></span>. I have always had a creative side which I believe makes me suited to web-development. I still write some fiction. Despite not liking foreign languages in school I have now learnt Spanish for my own interest.</p>
+</div>
+
+<div class="ttlBox">
+  <p> ok <span>lie</span>?</br></br></br></p>
+  <button class="ttl" onclick="interactive('truth',10,9,11,'Four')">Truth</button>
+  <button class="ttl" onclick="interactive('lie',10,9,11,'Four')">Lie</button>
+  <button class="ttl" onclick="interactive('truth',10,9,11,'Four')">Truth</button>
+  <p id="responseFour" style="visibility:hidden"></br></br><span id="answerFour"></span>. hey.</p>
+</div>
+
+<div class="ttlBox">
+  <p> ok <span>lie</span>?</br></br></br></p>
+  <button class="ttl" onclick="interactive('lie',12,13,14,'Five')">Lie</button>
+  <button class="ttl" onclick="interactive('truth',12,13,14,'Five')">Truth</button>
+  <button class="ttl" onclick="interactive('truth',12,13,14,'Five')">Truth</button>
+  <p id="responseFive" style="visibility:hidden"></br></br><span id="answerFive"></span>. hey.</p>
+</div>
+
+<div class="ttlBox">
+  <p> ok <span>lie</span>?</br></br></br></p>
+  <button class="ttl" onclick="interactive('truth',17,15,16,'Six')">Truth</button>
+  <button class="ttl" onclick="interactive('truth',17,15,16,'Six')">Truth</button>
+  <button class="ttl" onclick="interactive('lie',17,15,16,'Six')">Lie</button>
+  <p id="responseSix" style="visibility:hidden"></br></br><span id="answerSix"></span>. hey.</p>
+</div>
+
+
+
+<div class="ttlBox">
+  <p> ok <span>lie</span>?</br></br></br></p>
+  <button class="ttl" onclick="interactive('truth',19,18,20,'Seven')">Truth</button>
+  <button class="ttl" onclick="interactive('lie',19,18,20,'Seven')">Lie</button>
+  <button class="ttl" onclick="interactive('truth',19,18,20,'Seven')">Truth</button>
+  <p id="responseSeven" style="visibility:hidden"></br></br><span id="answerSeven"></span>. hey.</p>
+</div>
+
+<script>
+
+var menu = document.getElementsByClassName('box')
+
+for (i = 0; i < 5; i++) {
+
+  menu[i].addEventListener("mouseenter", function( event ) {
+    event.target.style.color = '#FF1783';
+  });
+
+  menu[i].addEventListener("mouseleave", function( event ) {
+    event.target.style.color = 'black';
+  });
+
+}
+
+function interactive(tl,l,t1,t2,Question) {
+  var ttl = document.getElementsByClassName('ttl')
+  ttl[t1].style.color = '#60FD11';
+  ttl[t2].style.color = '#60FD11';
+  ttl[l].style.color = '#FF340B';
+  var response = document.getElementById('response' + Question);
+  response.style.visibility = 'visible';
+  var answer = document.getElementById('answer' + Question);
+  if (tl == 'lie') {
+    answer.style.color = '#6EC30D';
+    answer.innerHTML = 'Congratulations, you found the lie';
+  } else if (tl == 'truth') {
+    answer.style.color = '#FF340B';
+    answer.innerHTML = 'You chose a truth';
+  }
+}
+
+</script>

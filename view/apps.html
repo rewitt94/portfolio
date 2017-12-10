@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+<link rel="stylesheet" type="text/css" href="style.css">
+
+<head>
+  <title>rickyHewittNet</title>
+</head>
+
+<div class="stamp">
+  <h1>rickyHewittNet</h1>
+</div>
+
+<div class="wrapper">
+
+  <a href="/"><div class="box">
+    <p>Home</p>
+  </div></a>
+
+  <a href="/iCV"><div class="box">
+    <p>My CV</p>
+  </div></a>
+
+  <a href="/blog"><div class="box">
+    <p>My Coding</p>
+  </div></a>
+
+  <a href="/apps"><div class="box">
+    <p>My Apps</p>
+  </div></a>
+
+  <a href="/contact"><div class="box">
+    <p>Contact</p>
+  </div></a>
+
+</div>
+
+<div class="title">
+  <h1> Here are the best selection of <span>my coding projects</span>. </h1>
+</div>
+
+<div class="blogBox">
+  <a href="/submarine"><h1 style="margin-bottom:20px"><span>Submarine Game</span> 08/12/17</h1></a>
+  <p>This is the first of my creations made with vanilla Javascript, HTML and CSS. The code is not to professional standards and can be found on GitHub <span>here</span>. It is not compatible with mobile. I have encountered a couple bugs on different browsers, but it runs smoothly on Chrome. </p>
+  <p></br><span>Copyright</span>:</p>
+</div>
+
+<script>
+
+var menu = document.getElementsByClassName('box')
+
+for (i = 0; i < 5; i++) {
+
+  menu[i].addEventListener("mouseenter", function( event ) {
+    event.target.style.color = '#FF1783';
+  });
+
+  menu[i].addEventListener("mouseleave", function( event ) {
+    event.target.style.color = 'black';
+  });
+
+}
+
+</script>
