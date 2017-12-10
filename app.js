@@ -5,6 +5,7 @@ var app = express();
 // link in these directories
 app.use(express.static(__dirname + '/view'));
 app.use(express.static(__dirname + '/script'));
+app.use(express.static(__dirname + '/submarine'));
 
 // send file to browser
 app.get('/',function(req,res){
@@ -28,7 +29,7 @@ app.get('/contact',function(req,res){
 });
 
 app.get('/submarine',function(req,res){
-  res.sendFile(__dirname + '/view/submarine.html');
+  res.sendFile(__dirname + '/submarine/submarine.html');
 });
 
 // 0 is node binary
