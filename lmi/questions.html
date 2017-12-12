@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<script src="variables.js"></script>
+<script src="questions.js"></script>
+
+<h1>Demo the questions</h1>
+
+<p> please read everything </p>
+
+<p> ------------------------------------ </p>
+
+<p> get your variables here </p>
+
+<p>put in a keyword to search soc:<input type="text" name="soc_search" value="Engineer" id="soc_search"></p>
+<button onclick="searchSoc(document.getElementById('soc_search').value)">search soc</button>
+<p id="soc_codes"></p>
+
+<button onclick="regions()">get regions</button>
+<p id="region_codes"></p>
+
+<p> gender codes: 1 = male, 2 = female.
+
+<p> ------------------------------------ </p>
+
+<p> so the game will take three variables </p>
+
+<p>soc code:<input type="text" name="soc" value="2121" id="soc_code"></p>
+<p>region code:<input type="text" name="soc" value="8" id="region_code"></p>
+<p>gender code:<input type="text" name="soc" value="1" id="gender_code"></p>
+
+<p> once you have input your vairables hit the button below </p>
+
+<button onclick="getQuestions(document.getElementById('soc_code').value,document.getElementById('region_code').value,document.getElementById('gender_code').value)">generate questions</button>
+
+<p> ------------------------------------ </p>

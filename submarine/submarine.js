@@ -160,10 +160,6 @@ function flameHit() {
   }
 }
 
-function topAndBottom() {
-
-}
-
 function mineSpawn() {
   if (Math.random() > mineProb) {
     var mine = document.createElement("IMG");
@@ -361,7 +357,6 @@ function update() {
     scroll();
     flameMove();
     flameHit();
-    topAndBottom();
     mineSpawn();
     mineCollision();
     mineShoot();
