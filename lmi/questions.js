@@ -1,9 +1,4 @@
-// const fetch = require('node-fetch')
-
-// needed inputs
-
-
-function getQuestions(soc,regionCode,genderCode) {
+function getQuestions(soc,regionCode) {
   var questions = [];
   fetch(`http://api.lmiforall.org.uk/api/v1/soc/code/${soc}`)
     .then(response => response.json())
@@ -12,6 +7,9 @@ function getQuestions(soc,regionCode,genderCode) {
       howManyInYourRegion(soc,jobTitle,regionCode,questions);
       howManyInTheUK(soc,jobTitle,questions);
       femalePercentage(soc,jobTitle,questions);
+      mostCommonDegree(soc,jobTitle,questions);
+      mostImportantSkill(soc,jobTitle,questions)
+      biggestEmployingIndustry(soc,jobTitle,questions);
       estimatedHours(soc,jobTitle,questions);
       estimatedPay(soc,jobTitle,questions);
     });
@@ -20,7 +18,7 @@ function getQuestions(soc,regionCode,genderCode) {
 
 function howManyInYourRegion(soc,jobTitle,regionCode,questions) {
   var today = new Date();
-  var year = today.getFullYear(); //this is a number
+  var year = today.getFullYear();
   var questionYear = 0;
   var regionTitle = '';
   var predictionNumber = 0;
@@ -30,15 +28,15 @@ function howManyInYourRegion(soc,jobTitle,regionCode,questions) {
     .then(json => json.predictedEmployment[Math.floor(Math.random() * (2025 - year))])
     .then(function(yearPrediction){
       questionYear = yearPrediction.year;
-      for(i=0;i<12;i++) {
-        if (yearPrediction.breakdown[i].code == regionCode) {
+      for(k=0;k<12;k++) {
+        if (yearPrediction.breakdown[k].code == regionCode) {
           if (/[356]/.test(regionCode)) {
-            regionTitle = 'the ' + yearPrediction.breakdown[i].name;
+            regionTitle = 'the ' + yearPrediction.breakdown[k].name;
           } else {
-            regionTitle = yearPrediction.breakdown[i].name;
+            regionTitle = yearPrediction.breakdown[k].name;
             regionTitle = regionTitle.replace(/[^\w\s]/g, "");
           }
-          predictionNumber = yearPrediction.breakdown[i].employment;
+          predictionNumber = yearPrediction.breakdown[k].employment;
         }
       }
       arrRegion.push(`How many ${jobTitle} are there predicted to be in ${regionTitle} in ${questionYear}?`);
@@ -51,7 +49,7 @@ function howManyInYourRegion(soc,jobTitle,regionCode,questions) {
 
 function howManyInTheUK(soc,jobTitle,questions) {
   var today = new Date();
-  var year = today.getFullYear(); //this is a number
+  var year = today.getFullYear();
   var questionYear = 0;
   var regionTitle = '';
   var predictionNumber = 0;
@@ -70,17 +68,9 @@ function howManyInTheUK(soc,jobTitle,questions) {
     });
 };
 
-function qualification(soc,jobTitle,questions) {
-
-}
-
-function mostImportantSkill(soc,jobTitle,questions) {
-
-}
-
 function femalePercentage(soc,jobTitle,questions) {
   var today = new Date();
-  var year = today.getFullYear(); //this is a number
+  var year = today.getFullYear();
   var questionYear = 0;
   var regionTitle = '';
   var malePrediction = 0;
@@ -90,20 +80,113 @@ function femalePercentage(soc,jobTitle,questions) {
   fetch(`http://api.lmiforall.org.uk/api/v1/wf/predict/breakdown/gender?soc=${soc}`)
     .then(response => response.json())
     .then(json => json.predictedEmployment[Math.floor(Math.random() * (2025 - year))])
-    .then(function(yearPrediction){
-      questionYear = yearPrediction.year;
-      for(i=0;i<2;i++) {
-        if (yearPrediction.breakdown[i].code == 1) {
-          malePrediction = yearPrediction.breakdown[i].employment;
-        } else if (yearPrediction.breakdown[i].code == 2) {
-          femalePrediction = yearPrediction.breakdown[i].employment;
+    .then(function(yearGenderPrediction){
+      questionYear = yearGenderPrediction.year;
+      for(j=0;j<2;j++) {
+        if (yearGenderPrediction.breakdown[j].code == 1) {
+          malePrediction = yearGenderPrediction.breakdown[j].employment;
+        } else if (yearGenderPrediction.breakdown[j].code == 2) {
+          femalePrediction = yearGenderPrediction.breakdown[j].employment;
         }
       }
       var femalePercentage = ((femalePrediction / (malePrediction + femalePrediction)) * 100).toFixed(1);
-      arrFemale.push(`How many ${jobTitle} are predicted to be female in the UK in ${questionYear}?`);
+      arrFemale.push(`What percentage of ${jobTitle} are predicted to be female in the UK in ${questionYear}?`);
       arrFemale.push(femalePercentage);
       arrFemale.push([(Math.random() * 100).toFixed(1), (Math.random() * 100).toFixed(1)]);
       questions.push(arrFemale);
+      // arr = [question,answer,[wrongAnswerOne,wrongAnswerTwo]]
+    });
+};
+
+function mostCommonDegree(soc,jobTitle,questions) {
+  var orderedDegrees = [];
+  var arrDegrees = [];
+  fetch(`http://api.lmiforall.org.uk/api/v1/hesa/courses/${soc}`)
+    .then(response => response.json())
+    .then(json => json.years[json.years.length-1])
+    .then(function(mostRecent){
+      if (mostRecent.courses.length < 3) {
+        return
+      }
+      orderedDegrees = mostRecent.courses.sort(function(gamma,delta){
+        return delta.percentage - gamma.percentage;
+      });
+      arrDegrees.push(`Which is the most common degree for ${jobTitle}?`)
+      arrDegrees.push(orderedDegrees[0].name.substring(5))
+      arrDegrees.push([orderedDegrees[1+Math.floor(Math.random()*(orderedDegrees.length-1))].name.substring(5),orderedDegrees[orderedDegrees.length-1].name.substring(5)])
+      questions.push(arrDegrees);
+    });
+};
+
+function mostImportantSkill(soc,jobTitle,questions) {
+  var arrSkill = [];
+  var orderedSkills = [];
+  var rankOne = [];
+  var rankTwo = [];
+  var rankThree = [];
+  fetch(`http://api.lmiforall.org.uk/api/v1/onet/importance/${soc}`)
+    .then(response => response.json())
+    .then(json => json.skills)
+    .then(function(skills){
+      for (l=0;l<skills.length;l++) {
+        if (skills[l].rank == 1) {
+          rankOne.push(skills[l])
+        } else if (skills[l].rank == 2) {
+          rankTwo.push(skills[l])
+        } else {
+          rankThree.push(skills[l])
+        }
+      };
+      if (rankOne.length < 1) {
+        return
+      }
+      rankOne.sort(function(alpha,beta){
+        return beta.score - alpha.score;
+      });
+      rankTwo.sort(function(alpha,beta){
+        return beta.score - alpha.score;
+      });
+      rankThree.sort(function(alpha,beta){
+        return beta.score - alpha.score;
+      });
+      orderedSkills = rankOne.concat(rankTwo).concat(rankThree)
+      console.log(orderedSkills)
+      arrSkill.push(`Which of the following is ranked the most important skill for ${jobTitle}?`)
+      arrSkill.push(orderedSkills[0].name)
+      arrSkill.push([orderedSkills[2+Math.floor(Math.random() * 4)].name,orderedSkills[6+Math.floor(Math.random() * 4)].name])
+      questions.push(arrSkill);
+      // arr = [question,answer,[wrongAnswerOne,wrongAnswerTwo]]
+    });
+};
+
+function biggestEmployingIndustry(soc,jobTitle,questions){
+  var today = new Date();
+  var year = today.getFullYear();
+  var questionYear = 0;
+  var regionTitle = '';
+  var orderedIndustries = [];
+  var arrIndustry = [];
+  fetch(`http://api.lmiforall.org.uk/api/v1/wf/predict/breakdown/industry?soc=${soc}`)
+    .then(response => response.json())
+    .then(json => json.predictedEmployment[Math.floor(Math.random() * (2025 - year))])
+    .then(function(yearIndustryPrediction){
+      questionYear = yearIndustryPrediction.year;
+      orderedIndustries = yearIndustryPrediction.breakdown.sort(function(epsilon,zeta){
+        return zeta.employment - epsilon.employment;
+      });
+      if (orderedIndustries.length < 3) {
+        return
+      } else if (orderedIndustries.length > 10) {
+      arrIndustry.push(`Which industry is expected to employ the most ${jobTitle} in ${questionYear}?`)
+      arrIndustry.push(orderedIndustries[0].name)
+      arrIndustry.push([orderedIndustries[1+Math.floor(Math.random()*5)].name,orderedIndustries[5+Math.floor(Math.random()*(orderedIndustries.length-6))].name])
+      questions.push(arrIndustry);
+      } else {
+        arrIndustry.push(`Which industry is expected to employ the most ${jobTitle} in ${questionYear}?`)
+        arrIndustry.push(orderedIndustries[0].name)
+        arrIndustry.push([orderedIndustries[1+Math.floor(Math.random()*(orderedIndustries.length-1))].name,orderedIndustries[orderedIndustries.length-1].name])
+        questions.push(arrIndustry);
+      }
       // arr = [question,answer,[wrongAnswerOne,wrongAnswerTwo]]
     });
 };
