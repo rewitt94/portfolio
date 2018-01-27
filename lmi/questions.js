@@ -1,3 +1,5 @@
+// CAREFUL THAT GENERATED FALSE ANSWERS DO NOT EQUAL THE REAL ANSWER
+
 function getQuestions(soc,regionCode) {
   var questions = [];
   fetch(`http://api.lmiforall.org.uk/api/v1/soc/code/${soc}`)

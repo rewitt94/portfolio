@@ -50,6 +50,12 @@ function reload() {
   location.reload();
 }
 
+function play() {
+  started = true;
+  var instructions = document.getElementById('instructions');
+  instructions.style.visibility = 'hidden';
+}
+
 
 // Four
 // This is the bulk of the code
@@ -147,16 +153,6 @@ function scroll() {
     if ((Number(sub.style.left.slice(0,-2)) - window.pageXOffset) < 500) {
       window.scrollBy(-3, 0);
     }
-  }
-}
-
-function flameMove() {
-  flame.style.left = parseInt(flame.style.left) + 4 + 'px';
-}
-
-function flameHit() {
-  if (Number(flame.style.left.slice(0,-2)) + 1250 > Number(sub.style.left.slice(0,-2))) {
-    dead = true;
   }
 }
 
@@ -355,8 +351,6 @@ function update() {
     subMove();
     torpedoMove();
     scroll();
-    flameMove();
-    flameHit();
     mineSpawn();
     mineCollision();
     mineShoot();
@@ -453,10 +447,10 @@ function up(keycode) {
   }
   // spawn torpedo
   if (keycode == 32) {
-    started = true;
-    var instructions = document.getElementById('instructions');
-    instructions.style.visibility = 'hidden';
     if (firedRight.length + firedLeft.length < 5  && dead == false) {
+      started = true;
+      var instructions = document.getElementById('instructions');
+      instructions.style.visibility = 'hidden';
       var torpedo = document.createElement("IMG");
       torpedo.setAttribute( "src", "http://www.clker.com/cliparts/1/E/6/6/w/J/bomb-hi.png");
       torpedo.setAttribute( "style", "position:absolute;width:60px" );

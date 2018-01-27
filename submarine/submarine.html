@@ -15,22 +15,22 @@
 <img src="http://www.freepngimg.com/download/fire/5-2-fire-free-download-png.png" id="flame">
 
 <div id="instructions">
-  <h1>Roll up roll up</h1>
+  <h1>Instructions</h1>
   <p>The <span>objective</span> is to travel as far right as possible.</p>
   <p><span>Dodge</span> missles and mines.</p>
   <p>Move the sub using the <span>arrow keys</span>.</p>
-  <p><span>Hold Z</span> for turbo. (You will need this to outrun the wall of fire)</p>
+  <p><span>Hold Z</span> for turbo.</p>
   <p><span>Press Space</span> to fire torpedos to destroy mines.</p>
-  <p>Fire a torpedo to <span>start</span></p>
   </br>
-  <a href="/apps"><button>Return</button><a/>
+  <button id="play" onclick="play()">Play</button>
+  <a href="/apps"><button>Back</button><a/>
 </div>
 
 <div id="gameover">
   <h1>GAME OVER</h1>
   <h1> You scored <span id="end_score"><span></h1>
-  <button id="reload" onclick="reload()">Replay</button>
-  <a href="/apps"><button>Return</button><a/>
+  <button id="reload" onclick="reload()">Reload</button>
+  <a href="/apps"><button>Back</button><a/>
 </div>
 
 <script src="submarine.js"></script>
